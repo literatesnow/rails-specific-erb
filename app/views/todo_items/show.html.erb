@@ -1,0 +1,18 @@
+<h1>View Todo</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%= @todo_item.title %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @todo_item.text %>
+</p>
+
+<p>
+  <strong>Due Date:</strong>
+  <%= @todo_item.due_date %>
+</p>
+
+<%= link_to 'Back', todo_items_path %>
