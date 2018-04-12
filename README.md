@@ -34,10 +34,16 @@ Simple Todo application using Ruby on Rails and Bootstrap.
         $ ./run_dev
       ```
 
-1. Inside the container, the first steps in development is to set up the database.
+1. Inside the container, the first steps in development is to set up the database which has to be done once.
 
       ```bash
-        service:/opt/service$ rake db:migrate
+        service:/opt/service$ rails db:migrate
+      ```
+
+1. Run tests.
+
+      ```bash
+        service:/opt/service$ rails test
       ```
 
 1. Starting the service which runs on [http://localhost:3000](http://localhost:3000).
