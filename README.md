@@ -17,7 +17,7 @@ Simple Todo application using Ruby on Rails and Bootstrap.
 1. Running (starts the application on [http://locahost:8080](http://locahost:8080)).
 
       ```bash
-        $ docker run -d -p 8080:3000 rails-specific-erb
+        $ docker run -d -p 8080:3000 -e RAILS_ENV=production rails-specific-erb
       ```
 
 ## Development
@@ -34,13 +34,7 @@ Simple Todo application using Ruby on Rails and Bootstrap.
         $ ./run_dev
       ```
 
-1. Inside the container, the first steps in development is to set up the database which has to be done once.
-
-      ```bash
-        service:/opt/service$ rails db:migrate
-      ```
-
-1. Run tests.
+1. Running tests.
 
       ```bash
         service:/opt/service$ rails test

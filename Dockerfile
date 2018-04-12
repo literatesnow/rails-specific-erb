@@ -22,8 +22,8 @@ RUN echo "Install apt" \
   && echo "Permissions" \
   && chown -R service:service /home/service/ \
   && echo "Cleaning up" \
-  && apt-get clean -y \
-  && apt-get --purge -y autoremove -y \
+  && apt-get -y clean \
+  && apt-get --purge -y autoremove \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
   && echo "Done"
 
@@ -34,8 +34,7 @@ USER service
 WORKDIR /opt/service/
 
 RUN echo "Bundle" \
-  && gem install service \
-  && bundle install \
+  && bundle install --without development test \
   && echo "Done"
 
 EXPOSE 3000

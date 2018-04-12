@@ -1,6 +1,6 @@
 #!/bin/sh
 
-LOCAL_PORT=5000
+LOCAL_PORT=3000
 PREFIX=
 BASE_DIR=$(dirname "$0")
 
@@ -12,5 +12,4 @@ fi
                      --rm \
                      -v "$(readlink -f "$BASE_DIR"):/opt/service/" \
                      -p "$LOCAL_PORT:3000" \
-                     --entrypoint /bin/bash \
                      rails-specific-erb-dev

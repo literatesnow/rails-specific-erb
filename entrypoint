@@ -1,15 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 
 BASE_DIR=$(dirname "$0")
 PORT=$1
 [ -z "$PORT" ] && PORT=3000
 
-export RAILS_ENV=production
-export RAILS_SERVE_STATIC_FILES=true
-export RAILS_LOG_TO_STDOUT=true
-
 cd "$BASE_DIR"
 
-bundle exec rake db:migrate
-bundle exec rake assets:precompile
-bundle exec rails server -b 0.0.0.0 -p "$PORT" -e production
+if [ "$RAILS_ENV" == "production" ]; then
+  export RAILS_SERVE_STATIC_FILES=true
+  export RAILS_LOG_TO_STDOUT=true
+
+  bundle exec rake db:migrate
+  bundle exec rake assets:precompile
+  bundle exec rails server -b 0.0.0.0 -p "$PORT" -e production
+
+else
+  bundle install --with development test
+  bundle exec rake db:migrate
+
+  /bin/bash
+fi
