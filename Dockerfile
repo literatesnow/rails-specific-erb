@@ -3,11 +3,19 @@ FROM ruby:2.5
 ARG USER_UID=2000
 ARG USER_GID=2000
 
-RUN echo "Install packages" \
+RUN echo "Install apt" \
   && export DEBIAN_FRONTEND=noninteractive \
   && apt-get -y update \
   && apt-get install -y --no-install-recommends \
-     nodejs sqlite3 \
+     apt-utils apt-transport-https \
+  && echo "Yarn source" \
+  && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg > /tmp/yarn.gpg \
+  && apt-key add /tmp/yarn.gpg \
+  && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
+  && echo "Install packages" \
+  && apt-get -y update \
+  && apt-get install -y --no-install-recommends \
+     nodejs sqlite3 yarn \
   && echo "Create user" \
   && groupadd --gid "$USER_GID" service \
   && useradd -m --home /home/service --uid "$USER_UID" --gid service --shell /bin/bash service \
@@ -30,4 +38,6 @@ RUN echo "Bundle" \
   && bundle install \
   && echo "Done"
 
-ENTRYPOINT ["/bin/bash"]
+EXPOSE 3000
+
+ENTRYPOINT ["/opt/service/entrypoint", "3000"]

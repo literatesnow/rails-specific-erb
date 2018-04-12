@@ -1,7 +1,0 @@
-#!/bin/sh
-
-sudo docker run -ti \
-                --rm \
-                -v "$(pwd):/opt/service/" \
-                -p 3000:3000 \
-                specific
