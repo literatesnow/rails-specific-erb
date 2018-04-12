@@ -1,6 +1,6 @@
 class TodoItemsController < ApplicationController
   def index
-    @todo_items = TodoItem.all
+    @todo_items = TodoItem.order('due_at asc, created_at asc')
   end
 
   def show
@@ -9,6 +9,7 @@ class TodoItemsController < ApplicationController
 
   def new
     @todo_item = TodoItem.new
+    @todo_item.due_at = DateTime.now + 7.days
   end
 
   def edit
@@ -21,7 +22,7 @@ class TodoItemsController < ApplicationController
     if @todo_item.save
       redirect_to @todo_item
     else
-      render 'new'
+      render :new
     end
   end
 
@@ -31,7 +32,7 @@ class TodoItemsController < ApplicationController
     if @todo_item.update(todo_items_params)
       redirect_to @todo_item
     else
-      render 'edit'
+      render :edit
     end
   end
 
@@ -45,6 +46,7 @@ class TodoItemsController < ApplicationController
   private
 
   def todo_items_params
-    params.require(:todo_item).permit(:title, :text, :due_date)
+    params.require(:todo_item)
+          .permit(:title, :text, :completed, :due_at)
   end
 end

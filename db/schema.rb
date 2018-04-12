@@ -10,14 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_11_191525) do
+ActiveRecord::Schema.define(version: 2018_04_12_013503) do
+
+# Could not dump table "sqlite_stat1" because of following StandardError
+#   Unknown type '' for column 'tbl'
 
   create_table "todo_items", force: :cascade do |t|
     t.string "title"
     t.text "text"
-    t.datetime "due_date"
+    t.datetime "due_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "completed"
   end
 
 end
