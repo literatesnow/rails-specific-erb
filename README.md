@@ -6,6 +6,12 @@ Simple Todo application using Ruby on Rails and Bootstrap.
 
 * [Docker](https://www.docker.com/) installed and running.
 
+### Browser Support
+
+Tested with Chrome x86_64 (Version 65.0.3325.181).
+
+* Requires a browser which supports HTML5 date/time picker.
+
 ## Production
 
 1. Building.
